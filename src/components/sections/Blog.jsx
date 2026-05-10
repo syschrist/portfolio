@@ -1,61 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Marquee from '../ui/Marquee';
 import { useTranslation } from 'react-i18next';
-import { ChevronDown } from 'lucide-react';
-
-const mockPosts = [
-  {
-    id: 1,
-    title: "Building Immersive UIs with Framer Motion",
-    date: "May 10, 2026",
-    excerpt: "Why animations matter for user experience and how to use them without degrading performance.",
-    content: "Animations are no longer just eye candy; they are essential for giving users feedback and guiding them through an interface. Using Framer Motion allows us to build complex, declarative animations in React effortlessly. The key is ensuring that we animate properties that don't trigger layout recalculations, like transform and opacity. In this project, I used AnimatePresence to ensure that when components unmount, they do so gracefully, leaving a lasting impression of fluidity and high quality."
-  },
-  {
-    id: 2,
-    title: "Integrating i18n seamlessly in React",
-    date: "April 28, 2026",
-    excerpt: "My journey learning how to scale multiple languages in a modern web app.",
-    content: "When a project grows, hardcoding strings becomes unmanageable. react-i18next solves this by creating a robust dictionary system. The real challenge is handling dynamic content and ensuring layout stability when words in one language are significantly longer than in another. Designing with flexbox and avoiding rigid fixed widths (except for specific UI toggles) usually prevents layout shifts when toggling between English and Spanish."
-  },
-  {
-    id: 3,
-    title: "Cybersecurity Basics for Web Developers",
-    date: "March 15, 2026",
-    excerpt: "Essential tips to ensure your web apps are secure by default.",
-    content: "From preventing XSS with React's built-in escaping to securing your API endpoints with CORS and rate limiting, security should never be an afterthought. Always validate inputs on both the client and the server, and never trust user data. Implementing strong authentication like JWT with proper HttpOnly cookies goes a long way."
-  },
-  {
-    id: 4,
-    title: "Optimizing Vite and Tailwind",
-    date: "February 02, 2026",
-    excerpt: "How to keep your bundle sizes small and your builds blazing fast.",
-    content: "Vite's esbuild integration already makes development incredibly fast, but for production, we need to be mindful of our dependencies. Tailwind CSS is fantastic because its JIT compiler ensures only the classes you actually use are shipped. Combine this with dynamic imports for heavy components, and you can achieve near-instant load times."
-  },
-  {
-    id: 5,
-    title: "The Future of Web Technologies",
-    date: "January 10, 2026",
-    excerpt: "A brief look at WebAssembly, Edge Computing, and AI integration.",
-    content: "The web is evolving rapidly. WebAssembly allows us to run high-performance applications previously restricted to desktop environments directly in the browser. Meanwhile, edge computing brings the backend closer to the user, reducing latency to virtually zero. AI is also playing a huge role in assisting development and powering smart user interfaces."
-  }
-];
+import { X, ArrowRight } from 'lucide-react';
 
 const Blog = () => {
   const { t } = useTranslation();
-  const [expandedPostId, setExpandedPostId] = useState(null);
+  // Fetch posts from the translation JSON. Make sure it returns an array.
+  const posts = t('blog.posts', { returnObjects: true }) || [];
+  
+  const [selectedPost, setSelectedPost] = useState(null);
   const [visibleCount, setVisibleCount] = useState(3);
 
-  const togglePost = (id) => {
-    setExpandedPostId(expandedPostId === id ? null : id);
-  };
+  // Prevent background scrolling when modal is open
+  useEffect(() => {
+    if (selectedPost) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [selectedPost]);
 
   const handleShowMore = () => {
-    if (visibleCount >= mockPosts.length) {
+    if (visibleCount >= posts.length) {
       setVisibleCount(3); // Reset to show less
     } else {
-      setVisibleCount(prev => Math.min(prev + 3, mockPosts.length));
+      setVisibleCount(prev => Math.min(prev + 3, posts.length));
     }
   };
 
@@ -68,17 +39,17 @@ const Blog = () => {
         </Marquee>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 md:px-12 mt-16">
+      <div className="max-w-4xl mx-auto px-4 md:px-12 mt-16 relative">
         <h2 className="text-sm font-medium mb-12 uppercase tracking-wider" style={{ color: 'var(--color-secondary)' }}>
           {t('blog.subtitle')}
         </h2>
 
         <div className="flex flex-col gap-6">
           <AnimatePresence>
-            {mockPosts.slice(0, visibleCount).map((post) => (
+            {Array.isArray(posts) && posts.slice(0, visibleCount).map((post) => (
               <motion.div
                 key={post.id}
-                layout
+                layoutId={`post-${post.id}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -87,65 +58,108 @@ const Blog = () => {
                 style={{ borderColor: 'var(--color-secondary)' }}
               >
                 <button
-                  onClick={() => togglePost(post.id)}
+                  onClick={() => setSelectedPost(post)}
                   className="w-full text-left flex justify-between items-start md:items-center group"
                 >
                   <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
                     <span className="text-sm font-mono opacity-60" style={{ color: 'var(--color-secondary)' }}>
                       {post.date}
                     </span>
-                    <h3 className="text-2xl font-medium transition-colors group-hover:text-gray-400" style={{ color: 'var(--color-primary)' }}>
+                    <h3 className="text-2xl font-medium transition-colors group-hover:opacity-70" style={{ color: 'var(--color-primary)' }}>
                       {post.title}
                     </h3>
                   </div>
                   <motion.div
-                    animate={{ rotate: expandedPostId === post.id ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="mt-1 md:mt-0"
+                    className="mt-1 md:mt-0 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-4 group-hover:translate-x-0"
                     style={{ color: 'var(--color-primary)' }}
                   >
-                    <ChevronDown size={24} />
+                    <ArrowRight size={24} />
                   </motion.div>
                 </button>
-
-                <AnimatePresence>
-                  {expandedPostId === post.id && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="pt-6 pl-0 md:pl-32 pr-4 md:pr-12 pb-4">
-                        <p className="text-lg font-medium italic mb-4" style={{ color: 'var(--color-secondary)' }}>
-                          "{post.excerpt}"
-                        </p>
-                        <p className="leading-relaxed opacity-90" style={{ color: 'var(--color-primary)' }}>
-                          {post.content}
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
 
         {/* Load More Button */}
-        {mockPosts.length > 3 && (
+        {Array.isArray(posts) && posts.length > 3 && (
           <motion.div layout className="mt-12 text-center">
             <button
               onClick={handleShowMore}
               className="px-6 py-3 rounded-full border text-sm font-medium transition-colors hover:bg-[var(--color-primary)] hover:text-[var(--color-background)]"
               style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}
             >
-              {visibleCount >= mockPosts.length ? t('blog.showLess') : t('blog.showMore')}
+              {visibleCount >= posts.length ? t('blog.showLess') : t('blog.showMore')}
             </button>
           </motion.div>
         )}
       </div>
+
+      {/* Full-Screen Immersive Modal */}
+      <AnimatePresence>
+        {selectedPost && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex justify-center items-end md:items-center bg-black/60 backdrop-blur-sm p-0 md:p-12"
+          >
+            {/* Click outside to close */}
+            <div 
+              className="absolute inset-0 z-0" 
+              onClick={() => setSelectedPost(null)}
+            />
+
+            <motion.div
+              layoutId={`post-${selectedPost.id}`}
+              className="relative z-10 w-full max-w-4xl max-h-[90vh] md:max-h-full h-full md:h-auto md:min-h-[60vh] bg-[var(--color-surface)] rounded-t-3xl md:rounded-2xl overflow-hidden flex flex-col shadow-2xl"
+              style={{ borderTop: '1px solid var(--color-secondary)', borderLeft: '1px solid var(--color-secondary)', borderRight: '1px solid var(--color-secondary)' }}
+            >
+              {/* Modal Header */}
+              <div className="sticky top-0 bg-[var(--color-surface)] z-20 px-8 py-6 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-secondary)' }}>
+                <span className="text-sm font-mono opacity-60" style={{ color: 'var(--color-secondary)' }}>
+                  {selectedPost.date}
+                </span>
+                <button
+                  onClick={() => setSelectedPost(null)}
+                  className="p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-[var(--color-background)] transition-colors"
+                  style={{ color: 'var(--color-primary)' }}
+                  aria-label={t('blog.close')}
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* Modal Content - Scrollable */}
+              <div className="p-8 md:p-12 overflow-y-auto">
+                <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight" style={{ color: 'var(--color-primary)' }}>
+                  {selectedPost.title}
+                </h2>
+                
+                <p className="text-xl md:text-2xl font-light italic mb-12" style={{ color: 'var(--color-secondary)' }}>
+                  "{selectedPost.excerpt}"
+                </p>
+                
+                {/* Simulated Article Body */}
+                <div className="prose prose-invert max-w-none text-lg leading-relaxed" style={{ color: 'var(--color-primary)' }}>
+                  <p className="mb-6">{selectedPost.content}</p>
+                  
+                  {/* Mock extra content to demonstrate scrolling */}
+                  <div className="w-full h-64 bg-gray-800 rounded-lg my-8 flex items-center justify-center text-gray-500">
+                    [ Placeholder Image ]
+                  </div>
+                  <p className="mb-6">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </p>
+                  <p>
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

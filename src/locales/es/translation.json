@@ -35,7 +35,45 @@
     "subtitle": "Pensamientos Recientes",
     "readMore": "Leer artículo completo",
     "showMore": "Mostrar más artículos",
-    "showLess": "Mostrar menos"
+    "showLess": "Mostrar menos",
+    "close": "Cerrar",
+    "posts": [
+      {
+        "id": 1,
+        "title": "Creando UIs Inmersivas con Framer Motion",
+        "date": "10 de Mayo, 2026",
+        "excerpt": "Por qué las animaciones importan para la experiencia del usuario y cómo usarlas sin degradar el rendimiento.",
+        "content": "Las animaciones ya no son solo un adorno visual; son esenciales para dar retroalimentación a los usuarios y guiarlos a través de una interfaz. Usar Framer Motion nos permite construir animaciones complejas y declarativas en React sin esfuerzo. La clave es asegurarse de animar propiedades que no desencadenen recálculos de diseño, como transform y opacity. En este proyecto, utilicé AnimatePresence para asegurar que cuando los componentes se desmontan, lo hacen con elegancia, dejando una impresión duradera de fluidez y alta calidad."
+      },
+      {
+        "id": 2,
+        "title": "Integrando i18n sin problemas en React",
+        "date": "28 de Abril, 2026",
+        "excerpt": "Mi viaje aprendiendo a escalar múltiples idiomas en una aplicación web moderna.",
+        "content": "Cuando un proyecto crece, codificar cadenas de texto directamente se vuelve inmanejable. react-i18next resuelve esto creando un sistema de diccionarios robusto. El verdadero desafío es manejar contenido dinámico y asegurar la estabilidad del diseño cuando las palabras en un idioma son significativamente más largas que en otro. Diseñar con flexbox y evitar anchos fijos rígidos (excepto para botones de interfaz específicos) usualmente previene los saltos de diseño al alternar entre Inglés y Español."
+      },
+      {
+        "id": 3,
+        "title": "Conceptos Básicos de Ciberseguridad",
+        "date": "15 de Marzo, 2026",
+        "excerpt": "Consejos esenciales para asegurar que tus aplicaciones web sean seguras por defecto.",
+        "content": "Desde prevenir XSS con el escape integrado de React hasta asegurar tus endpoints de API con CORS y limitación de tasa, la seguridad nunca debe ser una ocurrencia tardía. Siempre valida las entradas tanto en el cliente como en el servidor, y nunca confíes en los datos del usuario. Implementar una autenticación fuerte como JWT con cookies HttpOnly adecuadas es muy útil."
+      },
+      {
+        "id": 4,
+        "title": "Optimizando Vite y Tailwind",
+        "date": "02 de Febrero, 2026",
+        "excerpt": "Cómo mantener tus bundles pequeños y tus construcciones increíblemente rápidas.",
+        "content": "La integración de esbuild en Vite ya hace que el desarrollo sea increíblemente rápido, pero para producción, debemos ser conscientes de nuestras dependencias. Tailwind CSS es fantástico porque su compilador JIT asegura que solo se envíen las clases que realmente usas. Combina esto con importaciones dinámicas para componentes pesados y podrás lograr tiempos de carga casi instantáneos."
+      },
+      {
+        "id": 5,
+        "title": "El Futuro de las Tecnologías Web",
+        "date": "10 de Enero, 2026",
+        "excerpt": "Un breve vistazo a WebAssembly, Edge Computing e integración de IA.",
+        "content": "La web está evolucionando rápidamente. WebAssembly nos permite ejecutar aplicaciones de alto rendimiento previamente restringidas a entornos de escritorio directamente en el navegador. Mientras tanto, el edge computing acerca el backend al usuario, reduciendo la latencia a prácticamente cero. La IA también está jugando un papel muy importante asistiendo en el desarrollo y potenciando interfaces de usuario inteligentes."
+      }
+    ]
   },
   "footer": {
     "title": "Trabajemos <br /> juntos.",

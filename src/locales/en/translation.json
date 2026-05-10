@@ -35,7 +35,45 @@
     "subtitle": "Recent Thoughts",
     "readMore": "Read full article",
     "showMore": "Show more articles",
-    "showLess": "Show less"
+    "showLess": "Show less",
+    "close": "Close",
+    "posts": [
+      {
+        "id": 1,
+        "title": "Building Immersive UIs with Framer Motion",
+        "date": "May 10, 2026",
+        "excerpt": "Why animations matter for user experience and how to use them without degrading performance.",
+        "content": "Animations are no longer just eye candy; they are essential for giving users feedback and guiding them through an interface. Using Framer Motion allows us to build complex, declarative animations in React effortlessly. The key is ensuring that we animate properties that don't trigger layout recalculations, like transform and opacity. In this project, I used AnimatePresence to ensure that when components unmount, they do so gracefully, leaving a lasting impression of fluidity and high quality."
+      },
+      {
+        "id": 2,
+        "title": "Integrating i18n seamlessly in React",
+        "date": "April 28, 2026",
+        "excerpt": "My journey learning how to scale multiple languages in a modern web app.",
+        "content": "When a project grows, hardcoding strings becomes unmanageable. react-i18next solves this by creating a robust dictionary system. The real challenge is handling dynamic content and ensuring layout stability when words in one language are significantly longer than in another. Designing with flexbox and avoiding rigid fixed widths (except for specific UI toggles) usually prevents layout shifts when toggling between English and Spanish."
+      },
+      {
+        "id": 3,
+        "title": "Cybersecurity Basics for Web Developers",
+        "date": "March 15, 2026",
+        "excerpt": "Essential tips to ensure your web apps are secure by default.",
+        "content": "From preventing XSS with React's built-in escaping to securing your API endpoints with CORS and rate limiting, security should never be an afterthought. Always validate inputs on both the client and the server, and never trust user data. Implementing strong authentication like JWT with proper HttpOnly cookies goes a long way."
+      },
+      {
+        "id": 4,
+        "title": "Optimizing Vite and Tailwind",
+        "date": "February 02, 2026",
+        "excerpt": "How to keep your bundle sizes small and your builds blazing fast.",
+        "content": "Vite's esbuild integration already makes development incredibly fast, but for production, we need to be mindful of our dependencies. Tailwind CSS is fantastic because its JIT compiler ensures only the classes you actually use are shipped. Combine this with dynamic imports for heavy components, and you can achieve near-instant load times."
+      },
+      {
+        "id": 5,
+        "title": "The Future of Web Technologies",
+        "date": "January 10, 2026",
+        "excerpt": "A brief look at WebAssembly, Edge Computing, and AI integration.",
+        "content": "The web is evolving rapidly. WebAssembly allows us to run high-performance applications previously restricted to desktop environments directly in the browser. Meanwhile, edge computing brings the backend closer to the user, reducing latency to virtually zero. AI is also playing a huge role in assisting development and powering smart user interfaces."
+      }
+    ]
   },
   "footer": {
     "title": "Let's work <br /> together.",
