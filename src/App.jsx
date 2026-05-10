@@ -1,16 +1,17 @@
 import { useState } from 'react';
 
 import { AnimatePresence } from 'framer-motion';
-import Hero from './components/Hero';
-import ProjectGrid from './components/ProjectGrid';
-import Footer from './components/Footer';
-import SmoothScroll from './components/SmoothScroll';
-import ScrollIndicator from './components/ScrollIndicator';
-import Navbar from './components/Navbar';
-import About from './components/About';
-import ThemeToggle from './components/ThemeToggle';
-import CustomCursor from './components/CustomCursor';
-import Preloader from './components/Preloader';
+import Hero from './components/sections/Hero';
+import ProjectGrid from './components/sections/ProjectGrid';
+import Blog from './components/sections/Blog';
+import Footer from './components/layout/Footer';
+import SmoothScroll from './components/utils/SmoothScroll';
+import ScrollIndicator from './components/ui/ScrollIndicator';
+import Navbar from './components/layout/Navbar';
+import About from './components/sections/About';
+import ThemeToggle from './components/ui/ThemeToggle';
+import CustomCursor from './components/ui/CustomCursor';
+import Preloader from './components/ui/Preloader';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,6 +45,7 @@ function App() {
       <SmoothScroll>
         <Hero />
         <ProjectGrid />
+        <Blog />
         <About />
         <Footer />
       </SmoothScroll>

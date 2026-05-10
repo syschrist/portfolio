@@ -1,0 +1,44 @@
+{
+  "navbar": {
+    "work": "Projects",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Christ. J",
+    "subtitle": "Full Stack Developer",
+    "creative": "Creative Tech"
+  },
+  "projects": {
+    "title": "RECENT PROJECTS - ",
+    "subtitle": "Selected Works (2024-2025)",
+    "categories": {
+      "all": "All",
+      "fullstack": "Full-Stack",
+      "cybersecurity": "Cybersecurity / Systems",
+      "renewable": "Renewable Energies"
+    },
+    "view": "View"
+  },
+  "about": {
+    "marquee": "ABOUT ME - ",
+    "p1": "I’m a self-taught developer and creative problem-solver passionate about turning ideas into polished, high-performance digital experiences. Whether I’m building a sleek website, an interactive application, or a dynamic Roblox game, I focus on two things above all: performance and alignment with the client’s vision.",
+    "p2": "I work closely with clients who know what they want from the start—because clarity leads to better results. My approach is hands-on and detail-oriented, whether I’m crafting a project from scratch or implementing precise features like secure data persistence or interactive systems.",
+    "p3": "While I enjoy exploring a range of tools, GSAP remains one of my favorites for bringing interfaces to life with smooth, intentional motion that enhances—never distracts from—the user experience.",
+    "p4": "Outside of coding, you’ll find me listening to music, diving into video games, or practicing languages (currently polishing my English and German alongside my native Spanish).",
+    "p5": "I build not just to code—but to connect, deliver, and exceed expectations.",
+    "techTitle": "Techs I love to use"
+  },
+  "blog": {
+    "title": "INSIGHTS & ARTICLES - ",
+    "subtitle": "Recent Thoughts",
+    "readMore": "Read full article",
+    "showMore": "Show more articles",
+    "showLess": "Show less"
+  },
+  "footer": {
+    "title": "Let's work <br /> together.",
+    "rights": "Christ. J. All Rights Reserved."
+  }
+}

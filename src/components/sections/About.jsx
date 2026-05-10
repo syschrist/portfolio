@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Marquee from './Marquee';
+import Marquee from '../ui/Marquee';
+import { useTranslation } from 'react-i18next';
 
 const techStack = [
   "TypeScript", "React.js", "Next.js", "Tailwind CSS", "Framer Motion", "GSAP",
@@ -9,47 +10,46 @@ const techStack = [
 
 const About = () => {
   const containerRef = useRef(null);
+  const { t } = useTranslation();
 
   return (
     <section id="about" ref={containerRef} className="py-20 overflow-hidden bg-[var(--color-surface)] text-[var(--color-primary)] transition-colors duration-300">
 
       {/* Marquee Header */}
       <div className="pt-10 pb-14 text-[var(--color-primary)]">
-        <Marquee baseVelocity={-2}>
-          <span className="mr-8 block">ABOUT ME - </span>
+        <Marquee baseVelocity={2}>
+          <span className="mr-8 block">{t('about.marquee')}</span>
         </Marquee>
       </div>
 
       {/* Main Content Grid */}
       <div className="max-w-[820px] mx-auto px-4">
 
-
-
         {/* Columns 2 & 3: Description & Stack */}
         <div id="About_Description" className="flex flex-col justify-center">
           <p className="text-sm mb-4 md:text-base opacity-100">
-            I’m a self-taught developer and creative problem-solver passionate about turning ideas into polished, high-performance digital experiences. Whether I’m building a sleek website, an interactive application, or a dynamic Roblox game, I focus on two things above all: performance and alignment with the client’s vision.
+            {t('about.p1')}
           </p>
 
           <p className="text-sm mb-4 md:text-base opacity-100">
-            I work closely with clients who know what they want from the start—because clarity leads to better results. My approach is hands-on and detail-oriented, whether I’m crafting a project from scratch or implementing precise features like secure data persistence or interactive systems.
+            {t('about.p2')}
           </p>
 
           <p className="text-sm mb-4 md:text-base opacity-100">
-            While I enjoy exploring a range of tools, GSAP remains one of my favorites for bringing interfaces to life with smooth, intentional motion that enhances—never distracts from—the user experience.
+            {t('about.p3')}
           </p>
 
           <p className="text-sm mb-8 md:text-base opacity-100">
-            Outside of coding, you’ll find me listening to music, diving into video games, or practicing languages (currently polishing my English and German alongside my native Spanish).
+            {t('about.p4')}
           </p>
 
           <p className="text-sm mb-8 md:text-base opacity-100 font-semibold">
-            I build not just to code—but to connect, deliver, and exceed expectations.
+            {t('about.p5')}
           </p>
 
           <div>
             <h3 id="About_Stack-title" className="mt-2 mb-4 font-bold text-4xl">
-              Techs I love to use
+              {t('about.techTitle')}
             </h3>
 
             <div id="About_Stack-pills" className="flex flex-wrap gap-y-2 gap-x-2">

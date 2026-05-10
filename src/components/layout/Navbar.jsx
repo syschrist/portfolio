@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { X } from 'lucide-react';
-import Magnetic from './Magnetic';
+import Magnetic from '../ui/Magnetic';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showText, setShowText] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -43,9 +45,10 @@ const Navbar = () => {
   }, [scrollY]);
 
   const menuItems = [
-    { name: 'Work', href: '#work', id: 'work' },
-    { name: 'About', href: '#about', id: 'about' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: t('navbar.work'), href: '#work', id: 'work' },
+    { name: t('navbar.blog'), href: '#blog', id: 'blog' },
+    { name: t('navbar.about'), href: '#about', id: 'about' },
+    { name: t('navbar.contact'), href: '#contact', id: 'contact' },
   ];
 
   const name = "CHRIST";
@@ -98,10 +101,19 @@ const Navbar = () => {
           </span>
         </div>
 
-        {/* Menu Button with Animation */}
-        <div className="text-lg font-medium leading-5 pointer-events-auto overflow-hidden flex items-center" style={{ color: 'var(--color-primary)' }}>
-          <span className="italic">(&nbsp;&nbsp;</span>
-          <Magnetic strength={0.3}>
+        {/* Controls Container */}
+        <div className="text-lg font-medium leading-5 pointer-events-auto flex items-center gap-6" style={{ color: 'var(--color-primary)' }}>
+          
+          <button 
+            onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')}
+            className="hover:opacity-70 transition-opacity font-bold uppercase text-sm w-8 text-center"
+          >
+            {i18n.language === 'en' ? 'EN' : 'ES'}
+          </button>
+
+          <div className="flex items-center overflow-hidden">
+            <span className="italic">(&nbsp;&nbsp;</span>
+            <Magnetic strength={0.3}>
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMenuOpen(true)}
@@ -138,7 +150,8 @@ const Navbar = () => {
               </span>
             </motion.button>
           </Magnetic>
-          <span className="italic">&nbsp;)</span>
+            <span className="italic">&nbsp;)</span>
+          </div>
         </div>
       </nav>
 

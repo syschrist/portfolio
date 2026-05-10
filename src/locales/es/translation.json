@@ -1,0 +1,44 @@
+{
+  "navbar": {
+    "work": "Proyectos",
+    "about": "Sobre mí",
+    "blog": "Blog",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Christ. J",
+    "subtitle": "Desarrollador Full Stack",
+    "creative": "Tecnología Creativa"
+  },
+  "projects": {
+    "title": "PROYECTOS RECIENTES - ",
+    "subtitle": "Trabajos Seleccionados (2024-2025)",
+    "categories": {
+      "all": "Todos",
+      "fullstack": "Full-Stack",
+      "cybersecurity": "Ciberseguridad / Sistemas",
+      "renewable": "Energías Renovables"
+    },
+    "view": "Ver"
+  },
+  "about": {
+    "marquee": "SOBRE MÍ - ",
+    "p1": "Soy un desarrollador autodidacta y solucionador creativo de problemas, apasionado por convertir ideas en experiencias digitales pulidas y de alto rendimiento. Ya sea creando un sitio web elegante, una aplicación interactiva o un juego dinámico en Roblox, me enfoco en dos cosas por encima de todo: el rendimiento y la alineación con la visión del cliente.",
+    "p2": "Trabajo en estrecha colaboración con clientes que saben lo que quieren desde el principio—porque la claridad conduce a mejores resultados. Mi enfoque es práctico y detallista, ya sea elaborando un proyecto desde cero o implementando características precisas como persistencia de datos segura o sistemas interactivos.",
+    "p3": "Aunque disfruto explorando diversas herramientas, GSAP sigue siendo una de mis favoritas para dar vida a las interfaces con movimiento suave e intencional que mejora—y nunca distrae de—la experiencia del usuario.",
+    "p4": "Fuera de la programación, me encontrarás escuchando música, sumergiéndome en videojuegos o practicando idiomas (actualmente perfeccionando mi inglés y alemán junto a mi español nativo).",
+    "p5": "Construyo no solo para programar—sino para conectar, entregar y superar expectativas.",
+    "techTitle": "Tecnologías que me encanta usar"
+  },
+  "blog": {
+    "title": "ARTÍCULOS Y REFLEXIONES - ",
+    "subtitle": "Pensamientos Recientes",
+    "readMore": "Leer artículo completo",
+    "showMore": "Mostrar más artículos",
+    "showLess": "Mostrar menos"
+  },
+  "footer": {
+    "title": "Trabajemos <br /> juntos.",
+    "rights": "Christ. J. Todos los derechos reservados."
+  }
+}

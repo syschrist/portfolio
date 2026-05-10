@@ -1,16 +1,50 @@
-# React + Vite
+# Christ. J - Portfolio 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Portfolio Preview](/public/og-image.png)
 
-Currently, two official plugins are available:
+Welcome to the source code of my personal portfolio. I am a Full Stack Developer specializing in AI, Development, and Creative Tech.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
+- **Dynamic Projects Section**: Categorized filtering with smooth animations (`Framer Motion`).
+- **Internationalization (i18n)**: Fully translated into English and Spanish.
+- **Modern UI/UX**: Custom cursors, magnetic buttons, smooth scrolling, and dynamic marquees.
+- **Responsive Design**: Tailored for all devices using Tailwind CSS.
 
-## React Compiler
+## 🛠️ Tech Stack
+- **Framework**: React.js (Vite)
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion, Lenis (Smooth Scroll)
+- **i18n**: react-i18next
+- **Icons**: Lucide React
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📂 Project Structure
 
-## Expanding the ESLint configuration
+```text
+src/
+├── components/
+│   ├── layout/       # Navbar, Footer
+│   ├── sections/     # Hero, About, ProjectGrid
+│   ├── ui/           # Custom cursors, buttons, themes, loaders
+│   └── utils/        # Smooth scrolling logic
+├── locales/          # i18n translation files (en, es)
+├── i18n.js           # i18next configuration
+├── App.jsx           # Main application structure
+└── index.css         # Global styles
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Getting Started
+
+First, install the dependencies:
+```bash
+npm install
+```
+
+Then, run the development server:
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
+---
+*© 2025 Christ. J. All rights reserved.*
