@@ -131,7 +131,7 @@ const Blog = () => {
               </div>
 
               {/* Modal Content - Scrollable */}
-              <div className="p-8 md:p-12 overflow-y-auto">
+              <div className="p-8 md:p-12 overflow-y-auto" data-lenis-prevent="true">
                 <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight" style={{ color: 'var(--color-primary)' }}>
                   {selectedPost.title}
                 </h2>
