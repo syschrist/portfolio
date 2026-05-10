@@ -106,9 +106,20 @@ const Navbar = () => {
           
           <button 
             onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')}
-            className="hover:opacity-70 transition-opacity font-bold uppercase text-sm w-8 text-center"
+            className="hover:opacity-70 transition-opacity font-bold uppercase text-sm w-8 text-center relative h-5 overflow-hidden flex items-center justify-center"
           >
-            {i18n.language === 'en' ? 'EN' : 'ES'}
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={i18n.language}
+                initial={{ y: 10, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -10, opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                className="absolute"
+              >
+                {i18n.language === 'en' ? 'EN' : 'ES'}
+              </motion.span>
+            </AnimatePresence>
           </button>
 
           <div className="flex items-center overflow-hidden">
