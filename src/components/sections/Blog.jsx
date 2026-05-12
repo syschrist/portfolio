@@ -34,11 +34,17 @@ const Blog = () => {
 
       document.body.style.overflow = 'hidden';
 
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') setSelectedPost(null);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+
       return () => {
         cancelAnimationFrame(rafId);
         lenisInstance.current?.destroy();
         lenisInstance.current = null;
         document.body.style.overflow = 'unset';
+        window.removeEventListener('keydown', handleKeyDown);
       };
     }
   }, [selectedPost]);
@@ -70,7 +76,6 @@ const Blog = () => {
             {Array.isArray(posts) && posts.slice(0, visibleCount).map((post) => (
               <motion.div
                 key={post.id}
-                layoutId={`post-${post.id}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -107,8 +112,7 @@ const Blog = () => {
           <motion.div layout className="mt-12 text-center">
             <button
               onClick={handleShowMore}
-              className="px-6 py-3 rounded-full border text-sm font-medium transition-colors hover:bg-[var(--color-primary)] hover:text-[var(--color-background)]"
-              style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}
+              className="px-6 py-3 rounded-full border text-sm font-medium transition-colors border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-background)]"
             >
               {visibleCount >= posts.length ? t('blog.showLess') : t('blog.showMore')}
             </button>
@@ -128,20 +132,22 @@ const Blog = () => {
             <div className="absolute inset-0 z-0" onClick={() => setSelectedPost(null)} />
 
             <motion.div
-              layoutId={`post-${selectedPost.id}`}
-              className="relative z-10 w-full max-w-4xl max-h-[90vh] md:max-h-full h-full md:h-auto md:min-h-[60vh] bg-[var(--color-surface)] rounded-t-3xl md:rounded-2xl overflow-hidden flex flex-col shadow-2xl"
-              style={{ borderTop: '1px solid var(--color-secondary)', borderLeft: '1px solid var(--color-secondary)', borderRight: '1px solid var(--color-secondary)' }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ duration: 0.35, ease: 'easeOut' }}
+              className="relative z-10 w-full max-w-4xl max-h-[92vh] md:max-h-[85vh] bg-[var(--color-surface)] rounded-t-3xl md:rounded-2xl overflow-hidden flex flex-col shadow-2xl"
+              style={{ border: '1px solid var(--color-secondary)' }}
             >
-              <div className="sticky top-0 bg-[var(--color-surface)] z-20 px-8 py-6 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-secondary)' }}>
-                <span className="text-sm font-mono opacity-60" style={{ color: 'var(--color-secondary)' }}>
+              <div className="sticky top-0 bg-[var(--color-surface)] z-20 px-5 py-4 md:px-8 md:py-6 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-secondary)' }}>
+                <span className="text-xs md:text-sm font-mono opacity-60" style={{ color: 'var(--color-secondary)' }}>
                   {selectedPost.date}
                 </span>
                 <button
                   onClick={() => setSelectedPost(null)}
-                  className="p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-[var(--color-background)] transition-colors"
-                  style={{ color: 'var(--color-primary)' }}
+                  className="p-2 rounded-full transition-colors text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-background)]"
                 >
-                  <X size={24} />
+                  <X size={20} />
                 </button>
               </div>
 
@@ -150,33 +156,17 @@ const Blog = () => {
                 ref={modalScrollRef}
                 className="overflow-y-auto h-full"
               >
-                <div className="modal-content-inner p-8 md:p-12">
-                  <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight" style={{ color: 'var(--color-primary)' }}>
+                <div className="modal-content-inner p-5 md:p-12">
+                  <h2 className="text-2xl md:text-5xl font-bold mb-6 md:mb-8 leading-tight" style={{ color: 'var(--color-primary)' }}>
                     {selectedPost.title}
                   </h2>
                   
-                  <p className="text-xl md:text-2xl font-light italic mb-12" style={{ color: 'var(--color-secondary)' }}>
+                  <p className="text-base md:text-2xl font-light italic mb-8 md:mb-12" style={{ color: 'var(--color-secondary)' }}>
                     "{selectedPost.excerpt}"
                   </p>
                   
-                  <div className="prose prose-invert max-w-none text-lg leading-relaxed" style={{ color: 'var(--color-primary)' }}>
-                    <p className="mb-6">{selectedPost.content}</p>
-                    <div className="w-full h-64 bg-gray-800 rounded-lg my-8 flex items-center justify-center text-gray-500">
-                      [ Placeholder Image ]
-                    </div>
-                    <p className="mb-6">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <p className="mb-6">
-                      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                    {/* Extra mock content for testing scroll */}
-                    <p className="mb-6">
-                      Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
-                    </p>
-                    <p>
-                      Donec accumsan, ipsum sed dignissim feugiat, risus nisl egestas massa, in pulvinar neque leo ac lectus. Fusce pretium porta nisl.
-                    </p>
+                  <div className="prose prose-invert max-w-none text-base md:text-lg leading-relaxed" style={{ color: 'var(--color-primary)' }}>
+                    <p className="mb-6 whitespace-pre-wrap">{selectedPost.content}</p>
                   </div>
                 </div>
               </div>

@@ -19,7 +19,64 @@
       "cybersecurity": "Cybersecurity / Systems",
       "renewable": "Renewable Energies"
     },
-    "view": "View"
+    "view": "View",
+    "list": [
+      {
+        "id": 1,
+        "title": "AI-Powered Resume Builder",
+        "category": "Full-Stack",
+        "image": "/projects/CV_Generator.png",
+        "link": "https://resumecraft-ai-yu36.onrender.com/",
+        "techStack": ["React", "Cohere API", "Tailwind", "PDF Generation"]
+      },
+      {
+        "id": 2,
+        "title": "NovaBook",
+        "category": "Full-Stack",
+        "image": "/projects/NovaBook.png",
+        "link": "https://nova-book.vercel.app/",
+        "techStack": ["Next.js", "Supabase", "Prisma", "Stripe"]
+      },
+      {
+        "id": 5,
+        "title": "Active Threat Detection & Response Lab",
+        "category": "Cybersecurity / Systems",
+        "image": "/projects/Wazuh_Lab.jpg",
+        "githubLink": "https://github.com/syschrist/Wazuh-Detection-Lab",
+        "techStack": ["Wazuh", "SIEM/XDR", "Linux", "Threat Intelligence"],
+        "details": {
+          "introduction": "Implementation of a full SOC environment using Wazuh for real-time security monitoring. This project demonstrates the ability to integrate external threat intelligence and automate defensive response to active attacks on a virtualized infrastructure.",
+          "challenges": [
+            {
+              "title": "1. Malware Detection with Threat Intelligence",
+              "action": "Infection simulation by downloading malicious files (EICAR test) on the monitored endpoint.",
+              "result": "Integration with VirusTotal API. The system detected the threat via file hash, confirmed by 65 search engines, triggering a Level 12 (Critical) alert.",
+              "image": "/projects/wazuh/threat_hunting.png"
+            },
+            {
+              "title": "2. File Integrity Monitoring (FIM)",
+              "action": "Real-time surveillance of critical directories (/etc, /home/christ). Password file (shadow) modifications were performed to test the response.",
+              "result": "Detailed log of who, when, and what was modified. High severity alerts were generated for unauthorized system file changes.",
+              "image": "/projects/wazuh/fim_events.png"
+            },
+            {
+              "title": "3. Active Response (Automatic Defense)",
+              "action": "Execution of an SSH brute force attack from Kali Linux against the Ubuntu agent.",
+              "result": "Wazuh identified the attack pattern and automatically executed the host-deny command. The attacker received a 'Connection refused' message.",
+              "image": "/projects/wazuh/hydra_attack.png"
+            }
+          ]
+        }
+      },
+      {
+        "id": 4,
+        "title": "Solar Grid Dashboard",
+        "category": "Renewable Energies",
+        "image": "/projects/placeholder.png",
+        "link": "#",
+        "techStack": ["React", "IoT", "Data Viz", "Node.js"]
+      }
+    ]
   },
   "about": {
     "marquee": "ABOUT ME - ",
@@ -38,6 +95,13 @@
     "showLess": "Show less",
     "close": "Close",
     "posts": [
+      {
+        "id": 6,
+        "title": "Automated Incident Response with Wazuh",
+        "date": "May 12, 2026",
+        "excerpt": "Technical detail on implementing a SIEM/XDR environment to bridge the gap between detection and automatic response.",
+        "content": "In this technical article, I detail my recent project implementing a SIEM/XDR environment where I managed to bridge the gap between detection and response. The main goal was to configure a system that doesn't just alert, but acts automatically against known threats.\n\n🛡️ The Scenario: From Passive Monitoring to Active Defense\n\nTraditionally, a SOC analyst must review alerts and decide on an action. In this lab, I used Wazuh as the main engine to orchestrate an automatic response.\n\nLab Architecture:\n• Manager: Wazuh Server on Ubuntu.\n• Endpoint: Ubuntu Desktop monitored in real-time.\n• Intelligence: API integration with VirusTotal.\n\n🔍 Step 1: Intelligent Malware Detection\nI configured the agent to watch critical directories. When downloading a malicious file (EICAR test) via terminal:\n1. Wazuh FIM detected file creation.\n2. The hash was automatically sent to VirusTotal.\n3. The alert escalated to Level 12 after the threat was confirmed by 65 security engines.\n\n⚡ Step 2: Active Response\nFor simulated Brute Force attacks from Kali Linux, the configuration went one step further:\n• Detection: The manager identified multiple failed SSH login attempts.\n• Action: The host-deny script was triggered.\n• Result: The attacker's IP was automatically blocked in the host's firewall.\n\n📈 Conclusions for a SOC environment\nThis project demonstrates key skills for a SOC Lvl 1 Analyst:\n1. MTTR reduction (Mean Time To Respond): Blocking happens in seconds.\n2. Automated Triage: VirusTotal integration efficiently eliminates false positives.\n3. System Hardening: Constant monitoring of critical system files (/etc/shadow)."
+      },
       {
         "id": 1,
         "title": "Building Immersive UIs with Framer Motion",

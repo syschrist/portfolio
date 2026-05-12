@@ -1,46 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Marquee from '../ui/Marquee';
 import { useTranslation } from 'react-i18next';
-
-const projects = [
-  {
-    id: 1,
-    title: "AI-Powered Resume Builder",
-    category: "Full-Stack",
-    image: "/projects/CV_Generator.png",
-    link: "https://resumecraft-ai-yu36.onrender.com/",
-    techStack: ["React", "Cohere API", "Tailwind", "PDF Generation"],
-  },
-  {
-    id: 2,
-    title: "NovaBook",
-    category: "Full-Stack",
-    image: "/projects/NovaBook.png",
-    link: "https://nova-book.vercel.app/",
-    techStack: ["Next.js", "Supabase", "Prisma", "Stripe"],
-  },
-  {
-    id: 3,
-    title: "Secure Network Monitor",
-    category: "Ciberseguridad / Sistemas",
-    image: "/projects/placeholder.png",
-    link: "#",
-    techStack: ["Python", "Wireshark", "Docker", "Linux"],
-  },
-  {
-    id: 4,
-    title: "Solar Grid Dashboard",
-    category: "Energías Renovables",
-    image: "/projects/placeholder.png",
-    link: "#",
-    techStack: ["React", "IoT", "Data Viz", "Node.js"],
-  }
-];
+import { X, Github, BookOpen } from 'lucide-react';
+import Lenis from 'lenis';
 
 const ProjectGrid = () => {
   const { t } = useTranslation();
+  const projects = t('projects.list', { returnObjects: true }) || [];
   const [activeCategory, setActiveCategory] = useState('All');
+  const [selectedProject, setSelectedProject] = useState(null);
+  const modalScrollRef = useRef(null);
+  const lenisInstance = useRef(null);
 
   const categories = [
     { id: 'All', label: t('projects.categories.all') },
@@ -52,6 +23,39 @@ const ProjectGrid = () => {
   const filteredProjects = activeCategory === 'All' 
     ? projects 
     : projects.filter(p => p.category === activeCategory);
+
+  useEffect(() => {
+    if (selectedProject && modalScrollRef.current) {
+      lenisInstance.current = new Lenis({
+        wrapper: modalScrollRef.current,
+        content: modalScrollRef.current.querySelector('.modal-content-inner'),
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+      });
+
+      function raf(time) {
+        lenisInstance.current?.raf(time);
+        requestAnimationFrame(raf);
+      }
+      const rafId = requestAnimationFrame(raf);
+
+      document.body.style.overflow = 'hidden';
+
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') setSelectedProject(null);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+
+      return () => {
+        cancelAnimationFrame(rafId);
+        lenisInstance.current?.destroy();
+        lenisInstance.current = null;
+        document.body.style.overflow = 'unset';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [selectedProject]);
 
   return (
     <section id="work" className="py-24 border-t" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-secondary)' }}>
@@ -90,31 +94,146 @@ const ProjectGrid = () => {
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           <AnimatePresence mode='popLayout'>
             {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+              <ProjectCard key={project.id} project={project} index={index} onClick={() => {
+                if (project.details) setSelectedProject(project);
+                else if (project.link !== "#") window.open(project.link, '_blank');
+              }} />
             ))}
           </AnimatePresence>
         </motion.div>
       </div>
+
+      {/* Project Details Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex justify-center items-end md:items-center bg-black/60 backdrop-blur-sm p-0 md:p-12"
+          >
+            <div className="absolute inset-0 z-0" onClick={() => setSelectedProject(null)} />
+
+            <motion.div
+              layoutId={`project-${selectedProject.id}`}
+              className="relative z-10 w-full max-w-4xl max-h-[90vh] md:max-h-full h-full md:h-auto md:min-h-[60vh] bg-[var(--color-surface)] rounded-t-3xl md:rounded-2xl overflow-hidden flex flex-col shadow-2xl"
+              style={{ borderTop: '1px solid var(--color-secondary)', borderLeft: '1px solid var(--color-secondary)', borderRight: '1px solid var(--color-secondary)' }}
+            >
+              <div className="sticky top-0 bg-[var(--color-surface)] z-20 px-8 py-6 border-b flex justify-between items-center" style={{ borderColor: 'var(--color-secondary)' }}>
+                <span className="text-sm font-mono opacity-60" style={{ color: 'var(--color-secondary)' }}>
+                  {selectedProject.category}
+                </span>
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="p-2 rounded-full hover:bg-[var(--color-secondary)] hover:text-[var(--color-background)] transition-colors"
+                  style={{ color: 'var(--color-primary)' }}
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div ref={modalScrollRef} className="overflow-y-auto h-full">
+                <div className="modal-content-inner p-8 md:p-12">
+                  <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight" style={{ color: 'var(--color-primary)' }}>
+                    {selectedProject.title}
+                  </h2>
+                  
+                  <div className="mb-12 rounded-xl overflow-hidden border" style={{ borderColor: 'var(--color-secondary)' }}>
+                    <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-auto object-cover max-h-[400px]" />
+                  </div>
+
+                  <div className="space-y-12" style={{ color: 'var(--color-primary)' }}>
+                    {selectedProject.details.introduction && (
+                      <div>
+                        <h3 className="text-sm font-medium uppercase tracking-widest mb-4 opacity-60">Introducción</h3>
+                        <p className="text-xl leading-relaxed font-light">{selectedProject.details.introduction}</p>
+                      </div>
+                    )}
+
+                    {selectedProject.details.challenges && selectedProject.details.challenges.map((challenge, i) => (
+                      <div key={i} className="space-y-6 pt-8" style={{ borderTop: '1px solid rgba(161,161,170,0.2)' }}>
+                        <h3 className="text-2xl font-bold" style={{ color: 'var(--color-primary)' }}>{challenge.title}</h3>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                          <div className="space-y-4">
+                            <p className="text-base leading-relaxed" style={{ color: 'var(--color-primary)' }}>
+                              <strong className="uppercase text-xs tracking-widest block mb-1" style={{ color: 'var(--color-secondary)' }}>Acción:</strong>
+                              {challenge.action}
+                            </p>
+                            <p className="text-base leading-relaxed" style={{ color: 'var(--color-primary)' }}>
+                              <strong className="uppercase text-xs tracking-widest block mb-1" style={{ color: 'var(--color-secondary)' }}>Resultado:</strong>
+                              {challenge.result}
+                            </p>
+                          </div>
+                          {challenge.image && (
+                            <div className="rounded-lg overflow-hidden border" style={{ borderColor: 'var(--color-secondary)' }}>
+                              <img src={challenge.image} alt={challenge.title} className="w-full h-auto object-cover" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* Fallback for old projects if any */}
+                    {selectedProject.details.problem && (
+                      <div>
+                        <h3 className="text-2xl font-medium mb-4">El Problema</h3>
+                        <p className="text-lg leading-relaxed opacity-90">{selectedProject.details.problem}</p>
+                      </div>
+                    )}
+                    {selectedProject.details.solution && (
+                      <div>
+                        <h3 className="text-2xl font-medium mb-4">La Solución</h3>
+                        <p className="text-lg leading-relaxed opacity-90">{selectedProject.details.solution}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-12 pt-8 border-t flex flex-col sm:flex-row gap-4" style={{ borderColor: 'var(--color-secondary)' }}>
+                    {selectedProject.githubLink && (
+                      <a href={selectedProject.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[var(--color-primary)] text-[var(--color-background)] font-medium transition-transform hover:scale-105">
+                        <Github size={20} />
+                        Ver Repositorio
+                      </a>
+                    )}
+                    <button onClick={() => {
+                        setSelectedProject(null);
+                        document.getElementById('blog')?.scrollIntoView({ behavior: 'smooth' });
+                      }} 
+                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-full border text-[var(--color-primary)] font-medium transition-colors hover:bg-[var(--color-secondary)] hover:text-[var(--color-background)]"
+                      style={{ borderColor: 'var(--color-secondary)' }}
+                    >
+                      <BookOpen size={20} />
+                      Leer Artículo Técnico
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project, index, onClick }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const { t } = useTranslation();
 
+  const isComingSoon = project.link === "#" && !project.details;
+
   return (
-    <motion.a
-      href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
+    <motion.div
+      layoutId={project.details ? `project-${project.id}` : undefined}
       layout
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.4 }}
-      className="group cursor-pointer block"
-      data-hover={t('projects.view')}
+      onClick={!isComingSoon ? onClick : undefined}
+      className={`group block relative ${isComingSoon ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
+      data-hover={!isComingSoon ? t('projects.view') : undefined}
     >
       <div className="relative aspect-[4/3] overflow-hidden rounded-lg mb-4 bg-gray-900">
         {!isLoaded && (
@@ -124,10 +243,17 @@ const ProjectCard = ({ project, index }) => {
           src={project.image}
           alt={project.title}
           onLoad={() => setIsLoaded(true)}
-          className={`object-cover w-full h-full transition-opacity duration-500 ${isLoaded ? 'opacity-80 group-hover:opacity-100' : 'opacity-0'}`}
-          whileHover={{ scale: 1.05 }}
+          className={`object-cover w-full h-full transition-opacity duration-500 ${isLoaded ? (isComingSoon ? 'opacity-40' : 'opacity-80 group-hover:opacity-100') : 'opacity-0'}`}
+          whileHover={!isComingSoon ? { scale: 1.05 } : {}}
           transition={{ duration: 0.5 }}
         />
+        {isComingSoon && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="px-4 py-2 rounded-full border bg-[var(--color-surface)] text-[var(--color-primary)] font-medium text-sm tracking-wider uppercase" style={{ borderColor: 'var(--color-primary)' }}>
+              Próximamente
+            </span>
+          </div>
+        )}
       </div>
       <div>
         <h4 className="text-2xl font-medium transition-colors" style={{ color: 'var(--color-primary)' }}>{project.title}</h4>
@@ -144,7 +270,7 @@ const ProjectCard = ({ project, index }) => {
           ))}
         </div>
       </div>
-    </motion.a>
+    </motion.div>
   );
 };
 
