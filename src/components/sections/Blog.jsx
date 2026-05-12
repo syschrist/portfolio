@@ -52,6 +52,10 @@ const Blog = () => {
   const handleShowMore = () => {
     if (visibleCount >= posts.length) {
       setVisibleCount(3);
+      // Smooth scroll back to top of section when collapsing
+      setTimeout(() => {
+        document.getElementById('blog')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
     } else {
       setVisibleCount(prev => Math.min(prev + 3, posts.length));
     }
@@ -71,32 +75,32 @@ const Blog = () => {
           {t('blog.subtitle')}
         </h2>
 
-        <div className="flex flex-col gap-6">
-          <AnimatePresence>
+        <motion.div layout className="flex flex-col gap-6">
+          <AnimatePresence initial={false}>
             {Array.isArray(posts) && posts.slice(0, visibleCount).map((post) => (
               <motion.div
                 key={post.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                className="border-b pb-6"
+                exit={{ opacity: 0, height: 0, marginBottom: 0, paddingBottom: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                className="border-b pb-6 overflow-hidden"
                 style={{ borderColor: 'var(--color-secondary)' }}
               >
                 <button
                   onClick={() => setSelectedPost(post)}
-                  className="w-full text-left flex justify-between items-start md:items-center group"
+                  className="w-full text-left flex justify-between items-start md:items-center group outline-none focus-visible:ring-1 focus-visible:ring-[var(--color-secondary)] rounded-sm"
                 >
                   <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
                     <span className="text-sm font-mono opacity-60" style={{ color: 'var(--color-secondary)' }}>
                       {post.date}
                     </span>
-                    <h3 className="text-2xl font-medium transition-colors group-hover:opacity-70" style={{ color: 'var(--color-primary)' }}>
+                    <h3 className="text-xl md:text-2xl font-medium transition-colors group-hover:opacity-70" style={{ color: 'var(--color-primary)' }}>
                       {post.title}
                     </h3>
                   </div>
                   <motion.div
-                    className="mt-1 md:mt-0 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-4 group-hover:translate-x-0"
+                    className="mt-1 md:mt-0 opacity-0 group-hover:opacity-100 transition-opacity -translate-x-4 group-hover:translate-x-0 shrink-0 ml-4"
                     style={{ color: 'var(--color-primary)' }}
                   >
                     <ArrowRight size={24} />
@@ -105,7 +109,7 @@ const Blog = () => {
               </motion.div>
             ))}
           </AnimatePresence>
-        </div>
+        </motion.div>
 
         {/* Load More Button */}
         {Array.isArray(posts) && posts.length > 3 && (
