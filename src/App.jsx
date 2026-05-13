@@ -5,7 +5,7 @@ import Hero from './components/sections/Hero';
 import ProjectGrid from './components/sections/ProjectGrid';
 import Blog from './components/sections/Blog';
 import Footer from './components/layout/Footer';
-import SmoothScroll from './components/utils/SmoothScroll';
+import SmoothScroll from './components/layout/SmoothScroll';
 import ScrollIndicator from './components/ui/ScrollIndicator';
 import Navbar from './components/layout/Navbar';
 import About from './components/sections/About';

@@ -41,7 +41,7 @@ const Marquee = ({ baseVelocity = 100, children }) => {
 
   return (
     <div className="overflow-hidden m-0 whitespace-nowrap flex flex-nowrap">
-      <motion.div className="flex flex-nowrap font-extrabold italic text-[32px] md:text-[64px] lg:text-[80px]" style={{ x }}>
+      <motion.div className="flex flex-nowrap font-extrabold italic text-[22px] md:text-[36px] lg:text-[48px]" style={{ x }}>
         {children}
         {children}
         {children}

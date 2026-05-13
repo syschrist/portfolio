@@ -4,8 +4,8 @@ import Marquee from '../ui/Marquee';
 import { useTranslation } from 'react-i18next';
 
 const techStack = [
-  "TypeScript", "React.js", "Next.js", "Tailwind CSS", "Framer Motion", "GSAP",
-  "Prisma", "GraphQL", "Three.js", "React-Three-Fiber", "Figma", "GitHub"
+  "SIEM (Wazuh)", "Monitorización (Zabbix/Grafana)", "Linux (Ubuntu/Kali)", "Windows Server", "Networking (Cisco)",
+  "Desarrollo Full-Stack", "Automatización (Scripting)", "Instalaciones Eléctricas", "Energías Renovables"
 ];
 
 const About = () => {
@@ -23,7 +23,7 @@ const About = () => {
       </div>
 
       {/* Main Content Grid */}
-      <div className="max-w-[820px] mx-auto px-4">
+      <div className="max-w-[820px] mx-auto px-6 md:px-8">
 
         {/* Columns 2 & 3: Description & Stack */}
         <div id="About_Description" className="flex flex-col justify-center">

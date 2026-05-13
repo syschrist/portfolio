@@ -7,43 +7,31 @@
   },
   "hero": {
     "title": "Christ. J",
-    "subtitle": "Desarrollador Full Stack",
-    "creative": "Tecnología Creativa"
+    "subtitle": "Analista de Seguridad e Infraestructura",
+    "creative": "Monitorización SOC/NOC",
+    "available": "Disponible para trabajar",
+    "description": "Especialista en Ciberseguridad e Infraestructura con visión 360° — desde detección de amenazas hasta desarrollo full-stack.",
+    "cta": "Ver mis proyectos"
   },
   "projects": {
     "title": "PROYECTOS RECIENTES - ",
     "subtitle": "Trabajos Seleccionados (2024-2025)",
     "categories": {
       "all": "Todos",
-      "fullstack": "Full-Stack",
-      "cybersecurity": "Ciberseguridad / Sistemas",
-      "renewable": "Energías Renovables"
+      "security_infra": "Seguridad & Infraestructura",
+      "software_websec": "Desarrollo de Software & Seguridad Web",
+      "industrial_iot": "Sistemas Industriales / IoT"
     },
     "view": "Ver",
     "list": [
       {
-        "id": 1,
-        "title": "AI-Powered Resume Builder",
-        "category": "Full-Stack",
-        "image": "/projects/CV_Generator.png",
-        "link": "https://resumecraft-ai-yu36.onrender.com/",
-        "techStack": ["React", "Cohere API", "Tailwind", "PDF Generation"]
-      },
-      {
-        "id": 2,
-        "title": "NovaBook",
-        "category": "Full-Stack",
-        "image": "/projects/NovaBook.png",
-        "link": "https://nova-book.vercel.app/",
-        "techStack": ["Next.js", "Supabase", "Prisma", "Stripe"]
-      },
-      {
         "id": 5,
-        "title": "Laboratorio de Detección y Respuesta Activa",
-        "category": "Ciberseguridad / Sistemas",
-        "image": "/projects/Wazuh_Lab.jpg",
+        "title": "Despliegue de entorno SOC con Wazuh",
+        "categoryId": "security_infra",
+        "category": "Seguridad & Infraestructura",
+        "image": "/projects/wazuh/Wazuh_Lab.jpg",
         "githubLink": "https://github.com/syschrist/Wazuh-Detection-Lab",
-        "techStack": ["Wazuh", "SIEM/XDR", "Linux", "Threat Intelligence"],
+        "techStack": ["Wazuh", "XDR/EDR", "VirusTotal", "SOC"],
         "details": {
           "introduction": "Implementación de un entorno SOC completo utilizando Wazuh para la monitorización de seguridad en tiempo real. Este proyecto demuestra la capacidad de integrar inteligencia de amenazas externa y automatizar la respuesta defensiva ante ataques activos en una infraestructura virtualizada.",
           "challenges": [
@@ -69,23 +57,33 @@
         }
       },
       {
-        "id": 4,
-        "title": "Solar Grid Dashboard",
-        "category": "Energías Renovables",
-        "image": "/projects/placeholder.png",
+        "id": 6,
+        "title": "Laboratorio de Infraestructura Corporativa",
+        "categoryId": "security_infra",
+        "category": "Seguridad & Infraestructura",
+        "image": "/projects/corp-infra/main.png",
         "link": "#",
-        "techStack": ["React", "IoT", "Data Viz", "Node.js"]
+        "techStack": ["Windows Server 2022", "Active Directory", "GPOs", "Hardening"]
+      },
+      {
+        "id": 7,
+        "title": "Sistema de Monitorización Centralizada",
+        "categoryId": "security_infra",
+        "category": "Seguridad & Infraestructura",
+        "image": "/projects/monitoring/main.png",
+        "link": "#",
+        "techStack": ["Zabbix", "Grafana", "Dashboards", "NOC"]
       }
     ]
   },
   "about": {
     "marquee": "SOBRE MÍ - ",
-    "p1": "Soy un desarrollador autodidacta y solucionador creativo de problemas, apasionado por convertir ideas en experiencias digitales pulidas y de alto rendimiento. Ya sea creando un sitio web elegante, una aplicación interactiva o un juego dinámico en Roblox, me enfoco en dos cosas por encima de todo: el rendimiento y la alineación con la visión del cliente.",
-    "p2": "Trabajo en estrecha colaboración con clientes que saben lo que quieren desde el principio—porque la claridad conduce a mejores resultados. Mi enfoque es práctico y detallista, ya sea elaborando un proyecto desde cero o implementando características precisas como persistencia de datos segura o sistemas interactivos.",
-    "p3": "Aunque disfruto explorando diversas herramientas, GSAP sigue siendo una de mis favoritas para dar vida a las interfaces con movimiento suave e intencional que mejora—y nunca distrae de—la experiencia del usuario.",
-    "p4": "Fuera de la programación, me encontrarás escuchando música, sumergiéndome en videojuegos o practicando idiomas (actualmente perfeccionando mi inglés y alemán junto a mi español nativo).",
-    "p5": "Construyo no solo para programar—sino para conectar, entregar y superar expectativas.",
-    "techTitle": "Tecnologías que me encanta usar"
+    "p1": "Soy un profesional en formación avanzada con una sólida base técnica en Sistemas Microinformáticos y Redes (SMR), actualmente cursando Administración de Sistemas (ASIR) y con especialización en instalaciones eléctricas y solares fotovoltaicas. Además, soy Desarrollador Full-Stack y emprendedor.",
+    "p2": "Mi valor diferencial radica en comprender la tecnología de manera integral: desde la capa física (energía y hardware) hasta la capa lógica (código y seguridad). Esta visión 360° me permite asegurar y monitorizar infraestructuras con un enfoque completo y analítico.",
+    "p3": "Me especializo en entornos críticos y operativos (SOC/NOC), priorizando la detección temprana, la resolución de incidentes y el despliegue de soluciones robustas que garanticen la continuidad del negocio.",
+    "p4": "Más allá de la resolución de problemas técnicos, mi experiencia en desarrollo de software y scripting me facilita la automatización de tareas y la creación de herramientas a medida para optimizar los procesos de seguridad y administración.",
+    "p5": "No solo configuro sistemas, sino que aseguro su resiliencia, rendimiento y disponibilidad en todos los niveles.",
+    "techTitle": "Modelo T-Shaped"
   },
   "blog": {
     "title": "ARTÍCULOS Y REFLEXIONES - ",

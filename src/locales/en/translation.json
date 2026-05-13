@@ -7,43 +7,31 @@
   },
   "hero": {
     "title": "Christ. J",
-    "subtitle": "Full Stack Developer",
-    "creative": "Creative Tech"
+    "subtitle": "Security & Infrastructure Analyst",
+    "creative": "SOC/NOC Monitoring",
+    "available": "Available for work",
+    "description": "Cybersecurity & Infrastructure specialist with a 360° vision — from threat detection to full-stack development.",
+    "cta": "View my work"
   },
   "projects": {
     "title": "RECENT PROJECTS - ",
     "subtitle": "Selected Works (2024-2025)",
     "categories": {
       "all": "All",
-      "fullstack": "Full-Stack",
-      "cybersecurity": "Cybersecurity / Systems",
-      "renewable": "Renewable Energies"
+      "security_infra": "Security & Infrastructure",
+      "software_websec": "Software Development & Web Security",
+      "industrial_iot": "Industrial Systems / IoT"
     },
     "view": "View",
     "list": [
       {
-        "id": 1,
-        "title": "AI-Powered Resume Builder",
-        "category": "Full-Stack",
-        "image": "/projects/CV_Generator.png",
-        "link": "https://resumecraft-ai-yu36.onrender.com/",
-        "techStack": ["React", "Cohere API", "Tailwind", "PDF Generation"]
-      },
-      {
-        "id": 2,
-        "title": "NovaBook",
-        "category": "Full-Stack",
-        "image": "/projects/NovaBook.png",
-        "link": "https://nova-book.vercel.app/",
-        "techStack": ["Next.js", "Supabase", "Prisma", "Stripe"]
-      },
-      {
         "id": 5,
-        "title": "Active Threat Detection & Response Lab",
-        "category": "Cybersecurity / Systems",
-        "image": "/projects/Wazuh_Lab.jpg",
+        "title": "SOC Environment Deployment with Wazuh",
+        "categoryId": "security_infra",
+        "category": "Security & Infrastructure",
+        "image": "/projects/wazuh/Wazuh_Lab.jpg",
         "githubLink": "https://github.com/syschrist/Wazuh-Detection-Lab",
-        "techStack": ["Wazuh", "SIEM/XDR", "Linux", "Threat Intelligence"],
+        "techStack": ["Wazuh", "XDR/EDR", "VirusTotal", "SOC"],
         "details": {
           "introduction": "Implementation of a full SOC environment using Wazuh for real-time security monitoring. This project demonstrates the ability to integrate external threat intelligence and automate defensive response to active attacks on a virtualized infrastructure.",
           "challenges": [
@@ -69,23 +57,33 @@
         }
       },
       {
-        "id": 4,
-        "title": "Solar Grid Dashboard",
-        "category": "Renewable Energies",
-        "image": "/projects/placeholder.png",
+        "id": 6,
+        "title": "Corporate Infrastructure Laboratory",
+        "categoryId": "security_infra",
+        "category": "Security & Infrastructure",
+        "image": "/projects/corp-infra/main.png",
         "link": "#",
-        "techStack": ["React", "IoT", "Data Viz", "Node.js"]
+        "techStack": ["Windows Server 2022", "Active Directory", "GPOs", "Hardening"]
+      },
+      {
+        "id": 7,
+        "title": "Centralized Monitoring System",
+        "categoryId": "security_infra",
+        "category": "Security & Infrastructure",
+        "image": "/projects/monitoring/main.png",
+        "link": "#",
+        "techStack": ["Zabbix", "Grafana", "Dashboards", "NOC"]
       }
     ]
   },
   "about": {
     "marquee": "ABOUT ME - ",
-    "p1": "I’m a self-taught developer and creative problem-solver passionate about turning ideas into polished, high-performance digital experiences. Whether I’m building a sleek website, an interactive application, or a dynamic Roblox game, I focus on two things above all: performance and alignment with the client’s vision.",
-    "p2": "I work closely with clients who know what they want from the start—because clarity leads to better results. My approach is hands-on and detail-oriented, whether I’m crafting a project from scratch or implementing precise features like secure data persistence or interactive systems.",
-    "p3": "While I enjoy exploring a range of tools, GSAP remains one of my favorites for bringing interfaces to life with smooth, intentional motion that enhances—never distracts from—the user experience.",
-    "p4": "Outside of coding, you’ll find me listening to music, diving into video games, or practicing languages (currently polishing my English and German alongside my native Spanish).",
-    "p5": "I build not just to code—but to connect, deliver, and exceed expectations.",
-    "techTitle": "Techs I love to use"
+    "p1": "I am an advanced professional-in-training with a solid technical foundation in Microcomputer Systems and Networks, currently pursuing Systems Administration (ASIR) and specialized in electrical and solar photovoltaic installations. I am also a Full-Stack Developer and entrepreneur.",
+    "p2": "My core differentiator is understanding technology holistically: from the physical layer (energy and hardware) to the logical layer (code and security). This 360° vision allows me to secure and monitor infrastructures with a comprehensive and analytical approach.",
+    "p3": "I specialize in critical and operational environments (SOC/NOC), prioritizing early detection, incident resolution, and the deployment of robust solutions that ensure business continuity.",
+    "p4": "Beyond technical troubleshooting, my background in software development and scripting enables me to automate tasks and create custom tools to optimize security and administration processes.",
+    "p5": "I don't just configure systems; I ensure their resilience, performance, and availability at every level.",
+    "techTitle": "Specialization (T-Shaped Model)"
   },
   "blog": {
     "title": "INSIGHTS & ARTICLES - ",

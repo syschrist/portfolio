@@ -8,21 +8,21 @@ import Lenis from 'lenis';
 const ProjectGrid = () => {
   const { t } = useTranslation();
   const projects = t('projects.list', { returnObjects: true }) || [];
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
   const modalScrollRef = useRef(null);
   const lenisInstance = useRef(null);
 
   const categories = [
-    { id: 'All', label: t('projects.categories.all') },
-    { id: 'Full-Stack', label: t('projects.categories.fullstack') },
-    { id: 'Ciberseguridad / Sistemas', label: t('projects.categories.cybersecurity') },
-    { id: 'Energías Renovables', label: t('projects.categories.renewable') }
+    { id: 'all', label: t('projects.categories.all') },
+    { id: 'security_infra', label: t('projects.categories.security_infra') },
+    { id: 'software_websec', label: t('projects.categories.software_websec') },
+    { id: 'industrial_iot', label: t('projects.categories.industrial_iot') }
   ];
 
-  const filteredProjects = activeCategory === 'All' 
+  const filteredProjects = activeCategory === 'all' 
     ? projects 
-    : projects.filter(p => p.category === activeCategory);
+    : projects.filter(p => p.categoryId === activeCategory);
 
   useEffect(() => {
     if (selectedProject && modalScrollRef.current) {

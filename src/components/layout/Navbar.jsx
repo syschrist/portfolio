@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, Globe } from 'lucide-react';
 import Magnetic from '../ui/Magnetic';
 import { useTranslation } from 'react-i18next';
 
@@ -58,8 +58,13 @@ const Navbar = () => {
     <>
       {/* Fixed Navbar */}
       <nav
-        className="fixed top-0 left-0 right-0 flex border-b items-end justify-between mx-3 mt-3 pb-1 z-30 origin-left md:mx-5"
-        style={{ borderColor: 'var(--color-secondary)' }}
+        className="fixed top-0 left-0 right-0 flex border-b items-end justify-between px-3 pt-3 pb-1 z-50 origin-left md:px-5"
+        style={{
+          borderColor: 'var(--color-secondary)',
+          backgroundColor: 'rgba(var(--nav-bg-rgb, 10, 10, 10), 0.88)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+        }}
       >
         <motion.a
           href="/"
@@ -106,16 +111,19 @@ const Navbar = () => {
           
           <button 
             onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')}
-            className="hover:opacity-70 transition-opacity font-bold uppercase text-sm w-8 text-center relative h-5 overflow-hidden flex items-center justify-center"
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full border transition-all duration-200 hover:opacity-80 font-bold uppercase text-xs"
+            style={{ borderColor: 'var(--color-secondary)', color: 'var(--color-primary)' }}
+            aria-label="Switch language"
           >
+            <Globe size={13} strokeWidth={2} />
             <AnimatePresence mode="wait">
               <motion.span
                 key={i18n.language}
-                initial={{ y: 10, opacity: 0 }}
+                initial={{ y: 6, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
+                exit={{ y: -6, opacity: 0 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="absolute"
+                className="inline-block leading-none"
               >
                 {i18n.language === 'en' ? 'EN' : 'ES'}
               </motion.span>
