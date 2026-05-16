@@ -198,7 +198,7 @@ const ProjectGrid = () => {
                     )}
                     <button onClick={() => {
                         setSelectedProject(null);
-                        document.getElementById('blog')?.scrollIntoView({ behavior: 'smooth' });
+                        window.lenis?.scrollTo('#blog');
                       }} 
                       className="flex items-center justify-center gap-2 px-6 py-3 rounded-full border text-[var(--color-primary)] font-medium transition-colors hover:bg-[var(--color-secondary)] hover:text-[var(--color-background)]"
                       style={{ borderColor: 'var(--color-secondary)' }}

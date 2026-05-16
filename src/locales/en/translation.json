@@ -8,10 +8,10 @@
   "hero": {
     "title": "Christ. J",
     "subtitle": "Security & Infrastructure Analyst",
-    "creative": "SOC/NOC Monitoring",
     "available": "Available for work",
     "description": "Cybersecurity & Infrastructure specialist with a 360° vision — from threat detection to full-stack development.",
-    "cta": "View my work"
+    "cta": "View my work",
+    "expertise": "Expertise"
   },
   "projects": {
     "title": "RECENT PROJECTS - ",

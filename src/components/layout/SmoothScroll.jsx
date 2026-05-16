@@ -14,6 +14,9 @@ const SmoothScroll = ({ children }) => {
       touchMultiplier: 2,
     });
 
+    // Attach to window for global access
+    window.lenis = lenis;
+
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -23,6 +26,7 @@ const SmoothScroll = ({ children }) => {
 
     return () => {
       lenis.destroy();
+      window.lenis = null;
     };
   }, []);
 

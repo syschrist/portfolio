@@ -51,39 +51,76 @@ const Blog = () => {
 
   const handleShowMore = () => {
     if (visibleCount >= posts.length) {
+      // Parallel execution for a more responsive feel
+      window.lenis?.scrollTo('#blog', {
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
       setVisibleCount(3);
-      // Smooth scroll back to top of section when collapsing
-      setTimeout(() => {
-        document.getElementById('blog')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
     } else {
       setVisibleCount(prev => Math.min(prev + 3, posts.length));
     }
   };
 
   return (
-    <section id="blog" className="py-24 border-t bg-[var(--color-background)]" style={{ borderColor: 'var(--color-secondary)' }}>
-      {/* ... (marquee and list remain same) ... */}
+    <motion.section 
+      layout
+      id="blog" 
+      className="py-24 border-t bg-[var(--color-background)] overflow-hidden" 
+      style={{ borderColor: 'var(--color-secondary)' }}
+      transition={{
+        layout: { 
+          duration: 1.0, 
+          ease: [0.16, 1, 0.3, 1],
+          delay: visibleCount === 3 ? 0.3 : 0 
+        }
+      }}
+    >
       <div className="text-[var(--color-primary)]">
         <Marquee baseVelocity={2}>
           <span className="mr-8 block">{t('blog.title')}</span>
         </Marquee>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 md:px-12 mt-16 relative">
+      <motion.div 
+        layout
+        className="max-w-4xl mx-auto px-4 md:px-12 mt-16 relative"
+        transition={{
+          layout: { 
+            duration: 1.0, 
+            ease: [0.16, 1, 0.3, 1],
+            delay: visibleCount === 3 ? 0.3 : 0 
+          }
+        }}
+      >
         <h2 className="text-sm font-medium mb-12 uppercase tracking-wider" style={{ color: 'var(--color-secondary)' }}>
           {t('blog.subtitle')}
         </h2>
 
-        <motion.div layout className="flex flex-col gap-6">
+        <motion.div 
+          layout
+          className="flex flex-col gap-6"
+          transition={{
+            layout: { 
+              duration: 1.0, 
+              ease: [0.16, 1, 0.3, 1],
+              delay: visibleCount === 3 ? 0.3 : 0 
+            }
+          }}
+        >
           <AnimatePresence initial={false}>
             {Array.isArray(posts) && posts.slice(0, visibleCount).map((post) => (
               <motion.div
                 key={post.id}
+                layout
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, height: 0, marginBottom: 0, paddingBottom: 0 }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                exit={{ 
+                  opacity: 0, 
+                  y: -10,
+                  transition: { duration: 0.3 } 
+                }}
+                transition={{ duration: 0.4 }}
                 className="border-b pb-6 overflow-hidden"
                 style={{ borderColor: 'var(--color-secondary)' }}
               >
@@ -109,20 +146,30 @@ const Blog = () => {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
 
-        {/* Load More Button */}
-        {Array.isArray(posts) && posts.length > 3 && (
-          <motion.div layout className="mt-12 text-center">
-            <button
-              onClick={handleShowMore}
-              className="px-6 py-3 rounded-full border text-sm font-medium transition-colors border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-background)]"
+          {/* Load More Button - Synchronized movement */}
+          {Array.isArray(posts) && posts.length > 3 && (
+            <motion.div 
+              layout 
+              className="mt-12 text-center"
+              transition={{
+                layout: { 
+                  duration: 1.0, 
+                  ease: [0.16, 1, 0.3, 1],
+                  delay: visibleCount === 3 ? 0.3 : 0 
+                }
+              }}
             >
-              {visibleCount >= posts.length ? t('blog.showLess') : t('blog.showMore')}
-            </button>
-          </motion.div>
-        )}
-      </div>
+              <button
+                onClick={handleShowMore}
+                className="px-6 py-3 rounded-full border text-sm font-medium transition-colors border-[var(--color-primary)] text-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-background)]"
+              >
+                {visibleCount >= posts.length ? t('blog.showLess') : t('blog.showMore')}
+              </button>
+            </motion.div>
+          )}
+        </motion.div>
+      </motion.div>
 
       {/* Full-Screen Immersive Modal */}
       <AnimatePresence>
@@ -178,7 +225,7 @@ const Blog = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </section>
+    </motion.section>
   );
 };
 

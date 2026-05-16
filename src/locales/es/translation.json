@@ -8,10 +8,10 @@
   "hero": {
     "title": "Christ. J",
     "subtitle": "Analista de Seguridad e Infraestructura",
-    "creative": "Monitorización SOC/NOC",
     "available": "Disponible para trabajar",
     "description": "Especialista en Ciberseguridad e Infraestructura con visión 360° — desde detección de amenazas hasta desarrollo full-stack.",
-    "cta": "Ver mis proyectos"
+    "cta": "Ver mis proyectos",
+    "expertise": "Especialidad"
   },
   "projects": {
     "title": "PROYECTOS RECIENTES - ",

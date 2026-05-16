@@ -69,7 +69,11 @@ const Navbar = () => {
         <motion.a
           href="/"
           whileTap={{ scale: 0.95 }}
-          className="relative overflow-hidden px-1 rounded-none font-extrabold text-xl tracking-tight transition-all duration-300 bg-[var(--color-primary)] text-[var(--color-surface)]"
+          className={`relative overflow-hidden px-2 py-0.5 rounded-sm font-extrabold text-xl tracking-tight transition-all duration-500 ${
+            showText 
+              ? 'bg-[var(--color-primary)] text-[var(--color-background)]' 
+              : 'bg-transparent text-[var(--color-primary)]'
+          }`}
         >
           <div className="flex">
             {letters.map((letter, index) => (
@@ -199,7 +203,11 @@ const Navbar = () => {
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMenuOpen(false);
+                    window.lenis?.scrollTo(item.href);
+                  }}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   whileTap={{ scale: 0.95 }}
